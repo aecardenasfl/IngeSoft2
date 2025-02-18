@@ -38,10 +38,11 @@ public class Singleton {
     public static void cerrarConexion() {
         try {
             if (connection != null && !connection.isClosed()) {
+                System.out.println("Cerrando conexión a la base de datos");
                 connection.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Error de base de datos: " + e.getMessage());
         }
     }
 }

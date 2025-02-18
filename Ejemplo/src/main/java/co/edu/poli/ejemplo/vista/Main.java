@@ -3,7 +3,6 @@ package co.edu.poli.ejemplo.vista;
 import java.io.IOException;
 
 import co.edu.poli.ejemplo.controlador.MainController;
-import co.edu.poli.ejemplo.modelo.Cliente;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,8 +17,8 @@ public class Main extends Application {
     private static Scene scene;
 
     @Override
-    public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+    public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
+        scene = new Scene(loadFXML("main"));
         stage.setScene(scene);
         stage.show();
     }
@@ -35,9 +34,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         //launch();
-        Cliente client1 = new Cliente("123", "Pepito");
+        
         MainController main1 = new MainController();
-        System.out.println(main1.crearUsuario(client1));
+        main1.mostrarMenu();
     }
-
 }

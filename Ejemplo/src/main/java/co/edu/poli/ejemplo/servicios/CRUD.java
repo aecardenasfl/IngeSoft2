@@ -2,40 +2,42 @@ package co.edu.poli.ejemplo.servicios;
 
 import java.util.List;
 
-import co.edu.poli.ejemplo.modelo.Cliente;
-
 /**
- * 
+ * Interfaz genérica CRUD para cualquier clase de modelo
  */
-public interface CRUD {
+public interface CRUD<T> {
 
     /**
-     * @param c 
-     * @return
+     * Crea una nueva instancia de tipo T en la base de datos.
+     * @param t El objeto de tipo T a crear.
+     * @return Mensaje que indica el resultado de la operación.
      */
-    public String createCliente(Cliente c);
+    public String create(T t);
 
     /**
-     * @return
+     * Obtiene todos los objetos de tipo T desde la base de datos.
+     * @return Una lista con todos los objetos de tipo T.
      */
-    public List<Cliente> readAllCliente();
+    public List<T> readAll();
 
     /**
-     * @param id 
-     * @return
+     * Obtiene un objeto de tipo T de la base de datos usando su ID.
+     * @param id El ID del objeto a obtener.
+     * @return El objeto de tipo T, o null si no se encuentra.
      */
-    public Cliente readCliente(String id);
+    public T read(String id);
 
     /**
-     * @param id 
-     * @param c 
-     * @return
+     * Actualiza un objeto de tipo T en la base de datos.
+     * @param id El ID del objeto a actualizar.
+     * @param t El objeto con los nuevos datos.
+     * @return Mensaje que indica el resultado de la operación.
      */
-    public String updateCliente(String id, Cliente c);
+    public String update(String id, T t);
 
     /**
-     * @param id
+     * Elimina un objeto de tipo T de la base de datos usando su ID.
+     * @param id El ID del objeto a eliminar.
      */
-    public void deleteCliente(String id);
-
+    public void delete(String id);
 }
