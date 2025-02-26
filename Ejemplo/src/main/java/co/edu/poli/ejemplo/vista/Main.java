@@ -32,7 +32,7 @@ public class Main extends Application {
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         //launch();
         
         MainController main1 = new MainController();

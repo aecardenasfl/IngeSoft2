@@ -1,15 +1,12 @@
 package co.edu.poli.ejemplo.controlador;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import co.edu.poli.ejemplo.servicios.Singleton;
-import co.edu.poli.ejemplo.vista.Main;
-import javafx.fxml.FXML;
 
 public class MainController {
 
-    public void mostrarMenu() {
+    public void mostrarMenu() throws Exception {
         Scanner scanner = new Scanner(System.in);
         int opcion = 0;
 
@@ -51,11 +48,6 @@ public class MainController {
                     System.out.println("Opción no válida. Intente de nuevo.");
             }
         }
-    }
-
-    @FXML
-    private void abrirCliente() throws IOException {
-        Main.setRoot("cliente");
     }
 
 }

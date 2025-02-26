@@ -3,41 +3,45 @@ package co.edu.poli.ejemplo.servicios;
 import java.util.List;
 
 /**
- * Interfaz genérica CRUD para cualquier clase de modelo
+ * Interfaz genérica CRUD para cualquier clase de modelo.
+ * 
+ * @param <T>  Tipo del objeto que se manipula en la base de datos.
+ * @param <ID> Tipo del identificador del objeto.
+ * @param <R>  Tipo del resultado que devuelven las operaciones (puede ser String, Boolean, etc.).
  */
-public interface CRUD<T> {
+public interface CRUD<T, ID, R> {
 
     /**
      * Crea una nueva instancia de tipo T en la base de datos.
      * @param t El objeto de tipo T a crear.
-     * @return Mensaje que indica el resultado de la operación.
+     * @return Resultado de la operación (puede ser un mensaje, un booleano, etc.).
      */
-    public String create(T t);
+    R create(T t);
 
     /**
      * Obtiene todos los objetos de tipo T desde la base de datos.
      * @return Una lista con todos los objetos de tipo T.
      */
-    public List<T> readAll();
+    List<T> readAll();
 
     /**
      * Obtiene un objeto de tipo T de la base de datos usando su ID.
      * @param id El ID del objeto a obtener.
      * @return El objeto de tipo T, o null si no se encuentra.
      */
-    public T read(String id);
+    T read(ID id);
 
     /**
      * Actualiza un objeto de tipo T en la base de datos.
      * @param id El ID del objeto a actualizar.
      * @param t El objeto con los nuevos datos.
-     * @return Mensaje que indica el resultado de la operación.
+     * @return Resultado de la operación.
      */
-    public String update(String id, T t);
+    R update(ID id, T t);
 
     /**
      * Elimina un objeto de tipo T de la base de datos usando su ID.
      * @param id El ID del objeto a eliminar.
      */
-    public void delete(String id);
+    void delete(ID id);
 }

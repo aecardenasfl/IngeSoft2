@@ -3,7 +3,7 @@ package co.edu.poli.ejemplo.modelo;
 /**
  * 
  */
-public class Producto {
+public abstract class Producto {
 
     /**
      * Default constructor

@@ -1,5 +1,6 @@
 package co.edu.poli.ejemplo.controlador;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,7 +15,7 @@ public class ClientController {
         dao1 = new DAOCliente();
     }
 
-    public void mostrarMenu() {
+    public void mostrarMenu() throws Exception {
         Scanner scanner = new Scanner(System.in); // Crear un solo scanner
         int opcion = 0;
 
@@ -62,74 +63,98 @@ public class ClientController {
     }
 
     // Método para crear un cliente
-    public void crearCliente(Scanner scanner) { // Recibir scanner como parámetro
-        System.out.print("Ingrese el ID del cliente: ");
-        String idCrear = scanner.nextLine();
-        System.out.print("Ingrese el nombre del cliente: ");
-        String nombreCrear = scanner.nextLine();
-        
-        Cliente nuevoCliente = new Cliente();
-        nuevoCliente.setId(idCrear);
-        nuevoCliente.setNombre(nombreCrear);
-        
-        String mensaje = dao1.create(nuevoCliente);  // Llamar a DAOCliente para crear el cliente
-        System.out.println(mensaje);  
+    public void crearCliente(Scanner scanner) throws SQLException { // Recibir scanner como parámetro
+        try {
+
+            System.out.print("Ingrese el ID del cliente: ");
+            String idCrear = scanner.nextLine();
+            System.out.print("Ingrese el nombre del cliente: ");
+            String nombreCrear = scanner.nextLine();
+
+            Cliente nuevoCliente = new Cliente();
+            nuevoCliente.setId(idCrear);
+            nuevoCliente.setNombre(nombreCrear);
+
+            String mensaje = dao1.create(nuevoCliente);  // Llamar a DAOCliente para crear el cliente
+            System.out.println(mensaje);
+        } catch (Exception e) {
+        }
+
     }
 
     // Método para ver todos los clientes
-    public void verTodosLosClientes() {
-        List<Cliente> clientes = dao1.readAll();
-        if (clientes.isEmpty()) {
-            System.out.println("No hay clientes registrados.");
-        } else {
-            for (Cliente c : clientes) {
-                System.out.println("ID: " + c.getId() + ", Nombre: " + c.getNombre());
+    public void verTodosLosClientes() throws SQLException {
+
+        try {
+
+            List<Cliente> clientes = dao1.readAll();
+            if (clientes.isEmpty()) {
+                System.out.println("No hay clientes registrados.");
+            } else {
+                for (Cliente c : clientes) {
+                    System.out.println("ID: " + c.getId() + ", Nombre: " + c.getNombre());
+                }
             }
+        } catch (Exception e) {
         }
     }
 
     // Método para consultar un cliente específico
-    public void consultarCliente(Scanner scanner) { // Recibir scanner como parámetro
-        System.out.print("Ingrese el ID del cliente que desea consultar: ");
-        String idConsultar = scanner.nextLine();
-        
-        Cliente cliente = dao1.read(idConsultar);
-        if (cliente != null) {
-            System.out.println("Cliente encontrado:");
-            System.out.println("ID: " + cliente.getId() + ", Nombre: " + cliente.getNombre());
-        } else {
-            System.out.println("Cliente con ID " + idConsultar + " no encontrado.");
+    public void consultarCliente(Scanner scanner) throws SQLException { // Recibir scanner como parámetro
+        try {
+            System.out.print("Ingrese el ID del cliente que desea consultar: ");
+            String idConsultar = scanner.nextLine();
+
+            Cliente cliente = dao1.read(idConsultar);
+            if (cliente != null) {
+                System.out.println("Cliente encontrado:");
+                System.out.println("ID: " + cliente.getId() + ", Nombre: " + cliente.getNombre());
+            } else {
+                System.out.println("Cliente con ID " + idConsultar + " no encontrado.");
+            }
+        } catch (Exception e) {
         }
     }
 
     // Método para actualizar un cliente
-    public void actualizarCliente(Scanner scanner) { // Recibir scanner como parámetro
-        System.out.print("Ingrese el ID del cliente a actualizar: ");
-        String idActualizar = scanner.nextLine();
-        
-        Cliente clienteActualizar = dao1.read(idActualizar);
-        if (clienteActualizar != null) {
-            System.out.print("Ingrese el nuevo nombre del cliente: ");
-            String nuevoNombre = scanner.nextLine();
-            clienteActualizar.setNombre(nuevoNombre);
-            
-            String mensaje = dao1.update(idActualizar, clienteActualizar);  // Llamar a DAOCliente para actualizar
-            System.out.println(mensaje);
-        } else {
-            System.out.println("Cliente no encontrado.");
+    public void actualizarCliente(Scanner scanner) throws SQLException { // Recibir scanner como parámetro
+
+        try {
+
+            System.out.print("Ingrese el ID del cliente a actualizar: ");
+            String idActualizar = scanner.nextLine();
+
+            Cliente clienteActualizar = dao1.read(idActualizar);
+            if (clienteActualizar != null) {
+                System.out.print("Ingrese el nuevo nombre del cliente: ");
+                String nuevoNombre = scanner.nextLine();
+                clienteActualizar.setNombre(nuevoNombre);
+
+                String mensaje = dao1.update(idActualizar, clienteActualizar);  // Llamar a DAOCliente para actualizar
+                System.out.println(mensaje);
+            } else {
+                System.out.println("Cliente no encontrado.");
+            }
+        } catch (Exception e) {
         }
+
     }
 
     // Método para eliminar un cliente
-    public void eliminarCliente(Scanner scanner) { // Recibir scanner como parámetro
-        System.out.print("Ingrese el ID del cliente a eliminar: ");
-        String idEliminar = scanner.nextLine();
-        
-        Cliente clienteEliminar = dao1.read(idEliminar);
-        if (clienteEliminar != null) {
-            dao1.delete(idEliminar);  // Llamar a DAOCliente para eliminar
-        } else {
-            System.out.println("Cliente no encontrado.");
+    public void eliminarCliente(Scanner scanner) throws SQLException { // Recibir scanner como parámetro
+        try {
+
+            System.out.print("Ingrese el ID del cliente a eliminar: ");
+            String idEliminar = scanner.nextLine();
+
+            Cliente clienteEliminar = dao1.read(idEliminar);
+            if (clienteEliminar != null) {
+                dao1.delete(idEliminar);  // Llamar a DAOCliente para eliminar
+            } else {
+                System.out.println("Cliente no encontrado.");
+            }
+        } catch (Exception e) {
         }
+
     }
 }

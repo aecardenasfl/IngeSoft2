@@ -3,21 +3,20 @@ package co.edu.poli.ejemplo.servicios;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.poli.ejemplo.modelo.Cliente;
 
-public class DAOCliente implements CRUD<Cliente> {
+public class DAOCliente implements CRUD<Cliente, String, String> {
 
     private Connection connection;
 
     public DAOCliente() {
         try {
             this.connection = Singleton.getConnection();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Error de base de datos: " + e.getMessage());
         }
     }
