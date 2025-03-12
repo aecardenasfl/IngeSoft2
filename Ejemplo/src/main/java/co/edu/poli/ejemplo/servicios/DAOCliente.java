@@ -3,6 +3,7 @@ package co.edu.poli.ejemplo.servicios;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +12,11 @@ import co.edu.poli.ejemplo.modelo.Cliente;
 
 public class DAOCliente implements CRUD<Cliente, String, String> {
 
-    private Connection connection;
+    private final Connection connection;
 
-    public DAOCliente() {
-        try {
-            this.connection = Singleton.getConnection();
-        } catch (Exception e) {
-            System.out.println("Error de base de datos: " + e.getMessage());
-        }
+    public DAOCliente() throws SQLException {
+
+        this.connection = Singleton.getConnection();
     }
 
     @Override
@@ -34,15 +32,15 @@ public class DAOCliente implements CRUD<Cliente, String, String> {
                 }
             }
         } catch (Exception e) {
-           return "Error de base de datos: " + e.getMessage();
+            return "Error de base de datos: " + e.getMessage();
         }
-    
+
         // Si no existe el cliente, procedemos a insertarlo
         String sql = "INSERT INTO clientes (id, nombre) VALUES (?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, c.getId());
             stmt.setString(2, c.getNombre());
-            
+
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {
                 return "Cliente creado exitosamente";
@@ -50,17 +48,15 @@ public class DAOCliente implements CRUD<Cliente, String, String> {
                 return "Error al crear cliente";
             }
         } catch (Exception e) {
-           return "Error de base de datos: " + e.getMessage();
+            return "Error de base de datos: " + e.getMessage();
         }
     }
-    
 
     @Override
     public List<Cliente> readAll() {
         List<Cliente> clientes = new ArrayList<>();
         String sql = "SELECT * FROM clientes";
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Cliente c = new Cliente();
@@ -71,61 +67,56 @@ public class DAOCliente implements CRUD<Cliente, String, String> {
         } catch (Exception e) {
             System.out.println("Error de base de datos: " + e.getMessage());
         }
-          return clientes;
+        return clientes;
     }
 
     @Override
-    public Cliente read(String id) {
+    public Cliente read(String id) throws Exception {
         Cliente cliente = null;
         String sql = "SELECT * FROM clientes WHERE id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, id);
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, id);
 
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    cliente = new Cliente();
-                    cliente.setId(rs.getString("id"));
-                    cliente.setNombre(rs.getString("nombre"));
-                }
-            }
-        }catch(Exception e) {
-            System.out.println("Error de base de datos: " + e.getMessage());
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            cliente = new Cliente();
+            cliente.setId(rs.getString("id"));
+            cliente.setNombre(rs.getString("nombre"));
+        } else {
             return null;
         }
+
         return cliente;
     }
 
     @Override
-    public String update(String id, Cliente c) {
+    public String update(String id, Cliente c) throws Exception {
         String sql = "UPDATE clientes SET nombre = ? WHERE id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, c.getNombre());
-            stmt.setString(2, id);
-            
-            int rowsAffected = stmt.executeUpdate();
-            if (rowsAffected > 0) {
-                return "Cliente actualizado exitosamente";
-            } else {
-                return "Error al actualizar cliente";
-            }
-        } catch (Exception e) {
-            return "Error de base de datos: " + e.getMessage();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, c.getNombre());
+        stmt.setString(2, id);
+
+        int rowsAffected = stmt.executeUpdate();
+        if (rowsAffected > 0) {
+            return "Cliente actualizado exitosamente";
+        } else {
+            return "Cliente no encontrado en la base de datos";
         }
+
     }
 
     @Override
-    public void delete(String id) {
+    public String delete(String id) throws Exception {
         String sql = "DELETE FROM clientes WHERE id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, id);
-            int rowsAffected = stmt.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Cliente eliminado exitosamente");
-            } else {
-                System.out.println("Error al eliminar cliente");
-            }
-        } catch (Exception e) {
-            System.out.println("Error de base de datos: " + e.getMessage());
+
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, id);
+        int rowsAffected = stmt.executeUpdate();
+        if (rowsAffected > 0) {
+            return "Cliente eliminado exitosamente";
+        } else {
+            return "Cliente no encontrado en la base de datos";
         }
+
     }
 }

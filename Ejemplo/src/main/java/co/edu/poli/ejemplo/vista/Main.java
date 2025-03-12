@@ -2,7 +2,6 @@ package co.edu.poli.ejemplo.vista;
 
 import java.io.IOException;
 
-import co.edu.poli.ejemplo.controlador.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,9 +32,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws Exception {
-        //launch();
-        
-        MainController main1 = new MainController();
-        main1.mostrarMenu();
+        launch();
+                
     }
 }

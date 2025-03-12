@@ -34,12 +34,10 @@ public class Singleton {
     public static void cerrarConexion() throws SQLException{
     
             if (connection != null && !connection.isClosed()) {
-                System.out.println("Cerrando conexión a la base de datos");
+               // System.out.println("Cerrando conexión a la base de datos");
                 connection.close();
-            }
-        
+            }        
     }
-
     public static void main(String[] args) {
         try {
             Singleton.getConnection();

@@ -1,6 +1,6 @@
 package co.edu.poli.ejemplo.modelo;
 
-public class ProductoAlimentos extends Producto{
+public class ProductoAlimentos extends Producto {
 
     private float aporteCalorico;
 
@@ -16,10 +16,17 @@ public class ProductoAlimentos extends Producto{
         this.aporteCalorico = aporteCalorico;
     }
 
-    public ProductoAlimentos(String descripcion, String id, double precio, float aporteCalorico) {
-        super(descripcion, id, precio);
+    public ProductoAlimentos(String id, String descripcion, double precio, float aporteCalorico) {
+        super(id,descripcion, precio);
         this.aporteCalorico = aporteCalorico;
     }
 
-
+    @Override
+    public PrototipoProducto clonar() {
+        try {
+            return (PrototipoProducto) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("No se pudo clonar el producto", e);
+        }
+    }
 }

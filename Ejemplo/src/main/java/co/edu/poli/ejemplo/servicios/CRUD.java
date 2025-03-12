@@ -29,7 +29,7 @@ public interface CRUD<T, ID, R> {
      * @param id El ID del objeto a obtener.
      * @return El objeto de tipo T, o null si no se encuentra.
      */
-    T read(ID id);
+    T read(ID id) throws Exception;
 
     /**
      * Actualiza un objeto de tipo T en la base de datos.
@@ -37,11 +37,11 @@ public interface CRUD<T, ID, R> {
      * @param t El objeto con los nuevos datos.
      * @return Resultado de la operación.
      */
-    R update(ID id, T t);
+    R update(ID id, T t) throws Exception;
 
     /**
      * Elimina un objeto de tipo T de la base de datos usando su ID.
      * @param id El ID del objeto a eliminar.
      */
-    void delete(ID id);
+    R delete(ID id) throws Exception;
 }

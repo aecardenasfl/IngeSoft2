@@ -1,7 +1,7 @@
 package co.edu.poli.ejemplo.modelo;
 
 /**
- * 
+ *
  */
 public class Cliente {
 
@@ -12,12 +12,12 @@ public class Cliente {
     }
 
     /**
-     * 
+     *
      */
     private String id;
 
     /**
-     * 
+     *
      */
     private String nombre;
 
@@ -40,6 +40,16 @@ public class Cliente {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Cliente{");
+        sb.append("id=").append(id);
+        sb.append(", nombre=").append(nombre);
+        sb.append('}');
+        return sb.toString();
     }
 
 }

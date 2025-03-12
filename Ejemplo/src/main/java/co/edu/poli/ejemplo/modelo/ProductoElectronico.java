@@ -8,8 +8,8 @@ public class ProductoElectronico extends Producto {
         this.voltajeEntrada = voltajeEntrada;
     }
 
-    public ProductoElectronico(float voltajeEntrada, String descripcion, String id, double precio) {
-        super(descripcion, id, precio);
+    public ProductoElectronico(String id, String descripcion, double precio, float voltajeEntrada) {
+        super(id,descripcion, precio);
         this.voltajeEntrada = voltajeEntrada;
     }
 
@@ -21,5 +21,12 @@ public class ProductoElectronico extends Producto {
         this.voltajeEntrada = voltajeEntrada;
     }
 
-    
+    @Override
+    public PrototipoProducto clonar() {
+        try {
+            return (PrototipoProducto) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("No se pudo clonar el producto", e);
+        }
+    }
 }

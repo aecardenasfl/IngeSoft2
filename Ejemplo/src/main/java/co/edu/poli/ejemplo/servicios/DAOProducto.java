@@ -3,6 +3,7 @@ package co.edu.poli.ejemplo.servicios;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,16 +12,12 @@ import co.edu.poli.ejemplo.modelo.Producto;
 import co.edu.poli.ejemplo.modelo.ProductoAlimentos;
 import co.edu.poli.ejemplo.modelo.ProductoElectronico;
 
-public class DAOProducto implements CRUD<Producto, String, String> {
+public class DAOProducto implements DAOConsultasEspecializadas {
 
     private Connection connection;
 
-    public DAOProducto() {
-        try {
-            this.connection = Singleton.getConnection();
-        } catch (Exception e) {
-            System.out.println("Error de base de datos: " + e.getMessage());
-        }
+    public DAOProducto() throws SQLException {
+        this.connection = Singleton.getConnection();
     }
 
     @Override
@@ -74,9 +71,9 @@ public class DAOProducto implements CRUD<Producto, String, String> {
                 Float voltajeEntrada = rs.getFloat("voltaje_entrada");
 
                 if (aporteCalorico != 0) {
-                    productos.add(new ProductoAlimentos(descripcion, id, precio, aporteCalorico));
+                    productos.add(new ProductoAlimentos(id, descripcion, precio, aporteCalorico));
                 } else if (voltajeEntrada != 0) {
-                    productos.add(new ProductoElectronico(voltajeEntrada, descripcion, id, precio));
+                    productos.add(new ProductoElectronico(id, descripcion, precio, voltajeEntrada));
                 }
             }
         } catch (Exception e) {
@@ -99,9 +96,9 @@ public class DAOProducto implements CRUD<Producto, String, String> {
                     Float aporteCalorico = rs.getFloat("aporte_calorico");
                     Float voltajeEntrada = rs.getFloat("voltaje_entrada");
                     if (aporteCalorico != 0) {
-                        return new ProductoAlimentos(descripcion, id, precio, aporteCalorico);
+                        return new ProductoAlimentos(id, descripcion, precio, aporteCalorico);
                     } else if (voltajeEntrada != 0) {
-                        return new ProductoElectronico(voltajeEntrada, descripcion, id, precio);
+                        return new ProductoElectronico(id, descripcion, precio, voltajeEntrada);
                     }
                 }
             }
@@ -149,14 +146,14 @@ public class DAOProducto implements CRUD<Producto, String, String> {
     }
 
     @Override
-    public void delete(String id) {
+    public String delete(String id) {
         String sqlProductos = "DELETE FROM productos WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sqlProductos)) {
             stmt.setString(1, id);
             stmt.executeUpdate();
-            System.out.println("Producto eliminado exitosamente");
+            return "Producto eliminado exitosamente";
         } catch (Exception e) {
-            System.out.println("Error al eliminar producto: " + e.getMessage());
+            return "Error al eliminar producto: " + e.getMessage();
         }
     }
 
@@ -179,9 +176,9 @@ public class DAOProducto implements CRUD<Producto, String, String> {
                     Float voltajeEntrada = rs.getFloat("voltaje_entrada");
 
                     if (aporteCalorico != 0) {
-                        productos.add(new ProductoAlimentos(descripcion, id, precio, aporteCalorico));
+                        productos.add(new ProductoAlimentos(id, descripcion, precio, aporteCalorico));
                     } else if (voltajeEntrada != 0) {
-                        productos.add(new ProductoElectronico(voltajeEntrada, descripcion, id, precio));
+                        productos.add(new ProductoElectronico(id, descripcion, precio, voltajeEntrada));
                     }
                 }
             }

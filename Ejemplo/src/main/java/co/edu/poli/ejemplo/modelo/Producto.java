@@ -1,34 +1,17 @@
 package co.edu.poli.ejemplo.modelo;
 
-/**
- * 
- */
-public abstract class Producto {
+public abstract class Producto implements PrototipoProducto {
 
-    /**
-     * Default constructor
-     */
     public Producto() {
     }
 
-    /**
-     * 
-     */
     private String id;
-
-    /**
-     * 
-     */
     private String descripcion;
-
-    /**
-     * 
-     */
     private double precio;
 
-    public Producto(String descripcion, String id, double precio) {
-        this.descripcion = descripcion;
+    public Producto(String id, String descripcion, double precio) {
         this.id = id;
+        this.descripcion = descripcion;
         this.precio = precio;
     }
 
@@ -55,5 +38,18 @@ public abstract class Producto {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+    @Override
+    public String toString() {
+        return "Producto [id=" + id + ", descripcion=" + descripcion + ", precio=" + precio + "]";
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    @Override
+    public abstract PrototipoProducto clonar();
 
 }
