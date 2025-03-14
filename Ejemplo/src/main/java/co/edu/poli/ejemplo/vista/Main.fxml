@@ -64,12 +64,12 @@
                                                    <items>
                                                       <SplitMenuButton fx:id="seleccionClientesConsulta" mnemonicParsing="false" text="Seleccionar">
                                                         <items>
-                                                          <MenuItem fx:id="itemConsultarCliente" mnemonicParsing="false" onAction="#accionConsultaConsultar" text="Consultar por ID" />
+                                                          <MenuItem fx:id="itemConsultarCliente" mnemonicParsing="false" onAction="#accionConsultaCliente" text="Consultar por ID" />
                                                           <MenuItem fx:id="itemVerClientes" mnemonicParsing="false" onAction="#accionVerClientes" text="Ver todos" />
                                                         </items>
                                                       </SplitMenuButton>
                                                       <TextField fx:id="textClienteConsulta" prefHeight="25.0" prefWidth="83.0" promptText="ID" visible="false" />
-                                                      <Button fx:id="botonClienteConsulta" mnemonicParsing="false" onAction="#accionBotonConsulta" text="Ok" visible="false" />
+                                                      <Button fx:id="botonClienteConsulta" mnemonicParsing="false" onAction="#accionBotonConsultaCliente" text="Ok" visible="false" />
                                                    </items>
                                                 </ToolBar>
                                                 <TableView fx:id="tablaClientes" prefHeight="359.0" prefWidth="450.0">
@@ -145,19 +145,21 @@
                                                    <items>
                                                       <SplitMenuButton fx:id="seleccionProductosConsulta" mnemonicParsing="false" text="Seleccionar">
                                                          <items>
-                                                            <MenuItem fx:id="itemConsultarProducto" mnemonicParsing="false" onAction="#accionConsultaConsultar" text="Consultar por ID" />
-                                                            <MenuItem fx:id="itemVerProductos" mnemonicParsing="false" onAction="#accionVerClientes" text="Ver todos" />
+                                                            <MenuItem fx:id="itemConsultarProducto" mnemonicParsing="false" onAction="#accionConsultaProducto" text="Consultar por ID" />
+                                                            <MenuItem fx:id="itemVerProductos" mnemonicParsing="false" onAction="#accionVerProductos" text="Ver todos" />
                                                          </items>
                                                       </SplitMenuButton>
+                                                      <TextField fx:id="textProductoConsulta" prefHeight="25.0" prefWidth="83.0" promptText="ID" visible="false" />
+                                                      <Button fx:id="botonProductoConsulta" mnemonicParsing="false" onAction="#accionBotonConsultaProducto" text="Ok" visible="false" />
                                                    </items>
                                                 </ToolBar>
-                                                <TableView prefHeight="359.0" prefWidth="450.0">
+                                                <TableView fx:id="tablaProductos" prefHeight="359.0" prefWidth="450.0">
                                                    <columns>
-                                                      <TableColumn prefWidth="75.0" text="ID" />
-                                                      <TableColumn prefWidth="75.0" text="Descripcion" />
-                                                      <TableColumn prefWidth="75.0" text="Precio" />
-                                                      <TableColumn prefWidth="75.0" text="Tipo" />
-                                                      <TableColumn prefWidth="75.0" text="Información" />
+                                                      <TableColumn fx:id="colIDP" prefWidth="75.0" text="ID" />
+                                                      <TableColumn fx:id="colDes" prefWidth="75.0" text="Descripcion" />
+                                                      <TableColumn fx:id="colPrecio" prefWidth="75.0" text="Precio" />
+                                                      <TableColumn fx:id="colTipo" prefWidth="75.0" text="Tipo" />
+                                                      <TableColumn fx:id="colExtra" prefWidth="75.0" text="Información" />
                                                    </columns>
                                                 </TableView>
                                              </items>

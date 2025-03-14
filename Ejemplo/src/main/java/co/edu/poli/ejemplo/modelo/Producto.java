@@ -1,6 +1,6 @@
 package co.edu.poli.ejemplo.modelo;
 
-public abstract class Producto implements PrototipoProducto {
+public abstract class Producto{
 
     public Producto() {
     }
@@ -43,13 +43,5 @@ public abstract class Producto implements PrototipoProducto {
     public String toString() {
         return "Producto [id=" + id + ", descripcion=" + descripcion + ", precio=" + precio + "]";
     }
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
-    @Override
-    public abstract PrototipoProducto clonar();
 
 }

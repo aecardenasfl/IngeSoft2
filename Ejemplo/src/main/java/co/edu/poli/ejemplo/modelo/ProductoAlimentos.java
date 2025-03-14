@@ -1,6 +1,6 @@
 package co.edu.poli.ejemplo.modelo;
 
-public class ProductoAlimentos extends Producto {
+public class ProductoAlimentos extends Producto implements PrototipoProducto {
 
     private float aporteCalorico;
 
