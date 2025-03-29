@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.SplitPane?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -21,7 +23,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TabPane prefHeight="418.6666666666667" prefWidth="598.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TabPane prefHeight="419.0" prefWidth="598.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <tabs>
                             <Tab text="Administración">
                               <content>
@@ -94,13 +96,13 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TabPane prefHeight="418.6666666666667" prefWidth="598.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TabPane prefHeight="419.0" prefWidth="598.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <tabs>
                             <Tab text="Administración">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <SplitPane dividerPositions="0.5" prefHeight="389.3333333333333" prefWidth="598.0">
+                                          <SplitPane dividerPositions="0.5" prefHeight="390.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <items>
                                                 <ToolBar orientation="VERTICAL">
                                                    <items>
@@ -139,7 +141,7 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <SplitPane dividerPositions="0.5" prefHeight="389.3333333333333" prefWidth="598.0">
+                                          <SplitPane dividerPositions="0.5" prefHeight="390.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <items>
                                                 <ToolBar orientation="VERTICAL" prefHeight="392.0" prefWidth="101.0">
                                                    <items>
@@ -184,7 +186,7 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <SplitPane dividerPositions="0.5" prefHeight="389.3333333333333" prefWidth="598.0">
+                                          <SplitPane dividerPositions="0.5" prefHeight="390.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <items>
                                                 <ToolBar orientation="VERTICAL">
                                                    <items>
@@ -215,7 +217,7 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <SplitPane dividerPositions="0.5" prefHeight="389.3333333333333" prefWidth="598.0">
+                                          <SplitPane dividerPositions="0.5" prefHeight="390.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <items>
                                                 <ToolBar orientation="VERTICAL" prefHeight="392.0" prefWidth="101.0">
                                                    <items>
@@ -241,6 +243,231 @@
                         </TabPane>
                      </children>
                   </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Organizacion">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TabPane prefHeight="419.0" prefWidth="598.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <tabs>
+                            <Tab text="Departamento">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TabPane prefHeight="390.0" prefWidth="598.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <tabs>
+                                                <Tab text="Administración">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <SplitPane dividerPositions="0.5" prefHeight="389.3333333333333" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <items>
+                                                                  <ToolBar orientation="VERTICAL">
+                                                                     <items>
+                                                                        <SplitMenuButton fx:id="seleccionDepartamentoAdmin" mnemonicParsing="false" text="Seleccionar">
+                                                                           <items>
+                                                                              <MenuItem fx:id="itemCrearDepartamento" mnemonicParsing="false" onAction="#accionCrearDepartamento" text="Crear" />
+                                                                              <MenuItem fx:id="itemEliminarDepartamento" mnemonicParsing="false" onAction="#accionEliminarDepartamento" text="Eliminar" />
+                                                                           </items>
+                                                                        </SplitMenuButton>
+                                                                     </items>
+                                                                  </ToolBar>
+                                                                  <VBox>
+                                                                     <children>
+                                                                        <TextField fx:id="textDepartamentoNombre" editable="false" promptText="Nombre" />
+                                                                        <Button fx:id="botonConsultaClientes2" mnemonicParsing="false" onAction="#accionConsultarClientes" prefHeight="25.0" prefWidth="71.0" text="Consultar" visible="false" />
+                                                                        <Button fx:id="botonOkDepartamento" mnemonicParsing="false" onAction="#accionCompletarDepartamento" prefHeight="25.0" prefWidth="72.0" text="Ok" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </items>
+                                                            </SplitPane>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                                <Tab text="Consulta">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <SplitPane dividerPositions="0.5" prefHeight="390.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <items>
+                                                                  <ToolBar orientation="VERTICAL" prefHeight="392.0" prefWidth="101.0">
+                                                                     <items>
+                                                                        <SplitMenuButton fx:id="seleccionDepartamentoConsulta" mnemonicParsing="false" text="Seleccionar">
+                                                                           <items>
+                                                                              <MenuItem fx:id="itemConsultarDepartamento" mnemonicParsing="false" onAction="#accionConsultaDepartamento" text="Consultar por Nombre" />
+                                                                              <MenuItem fx:id="itemVerDepartamentos" mnemonicParsing="false" onAction="#accionVerDepartamentos" text="Ver todos" />
+                                                                           </items>
+                                                                        </SplitMenuButton>
+                                                                        <TextField fx:id="textDepartamentoConsulta" prefHeight="25.0" prefWidth="83.0" promptText="Nombre" visible="false" />
+                                                                        <Button fx:id="botonDepartamentoConsulta" mnemonicParsing="false" onAction="#accionBotonConsultaDepartamento" text="Ok" visible="false" />
+                                                                     </items>
+                                                                  </ToolBar>
+                                                                  <TreeView fx:id="arbolDepartamentos" prefHeight="200.0" prefWidth="200.0" />
+                                                               </items>
+                                                            </SplitPane>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                             </tabs>
+                                          </TabPane>
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Empleado">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TabPane prefHeight="390.0" prefWidth="598.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <tabs>
+                                                <Tab text="Administración">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <SplitPane dividerPositions="0.5" prefHeight="389.3333333333333" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <items>
+                                                                  <ToolBar orientation="VERTICAL">
+                                                                     <items>
+                                                                        <SplitMenuButton fx:id="seleccionEmpleadoAdmin" mnemonicParsing="false" text="Seleccionar">
+                                                                           <items>
+                                                                              <MenuItem fx:id="itemCrearEmpleado" mnemonicParsing="false" onAction="#accionCrearCliente" text="Crear" />
+                                                                              <MenuItem fx:id="itemEliminarEmpleado" mnemonicParsing="false" onAction="#accionEliminarCliente" text="Eliminar" />
+                                                                              <MenuItem fx:id="itemActualizarEmpleado" mnemonicParsing="false" onAction="#accionActualizarCliente" text="Actualizar" />
+                                                                           </items>
+                                                                        </SplitMenuButton>
+                                                                     </items>
+                                                                  </ToolBar>
+                                                                  <VBox>
+                                                                     <children>
+                                                                        <TextField fx:id="textEmpleadoID" promptText="ID" />
+                                                                        <TextField fx:id="textEmpleadoNombre" promptText="Nombre" />
+                                                                        <TextField fx:id="textEmpleadoCargo" promptText="Cargo" />
+                                                                        <SplitMenuButton fx:id="seleccionDepartamentoCrearEmpleado" mnemonicParsing="false" onAction="#llenarMenuDepartamentos" text="Departamento" />
+                                                                        <Button fx:id="botonOkEmpleados" mnemonicParsing="false" onAction="#accionCompletarEmpleados" prefHeight="25.0" prefWidth="72.0" text="Ok" />
+                                                                        <Button fx:id="botonConsultaClientes1" mnemonicParsing="false" onAction="#accionConsultarClientes" prefHeight="25.0" prefWidth="71.0" text="Consultar" visible="false" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </items>
+                                                            </SplitPane>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                                <Tab text="Consulta">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <SplitPane dividerPositions="0.5" prefHeight="389.3333333333333" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <items>
+                                                                  <ToolBar orientation="VERTICAL" prefHeight="392.0" prefWidth="101.0">
+                                                                     <items>
+                                                                        <SplitMenuButton fx:id="seleccionEmpleadoConsulta" mnemonicParsing="false" text="Seleccionar">
+                                                                           <items>
+                                                                              <MenuItem fx:id="itemConsultarEmpleado" mnemonicParsing="false" onAction="#accionConsultaCliente" text="Consultar por ID" />
+                                                                              <MenuItem fx:id="itemVerEmpleado" mnemonicParsing="false" onAction="#accionVerClientes" text="Ver todos" />
+                                                                           </items>
+                                                                        </SplitMenuButton>
+                                                                        <TextField fx:id="textEmpleadoConsulta" prefHeight="25.0" prefWidth="83.0" promptText="ID" visible="false" />
+                                                                        <Button fx:id="botonEmpleadoConsulta" mnemonicParsing="false" onAction="#accionBotonConsultaCliente" text="Ok" visible="false" />
+                                                                     </items>
+                                                                  </ToolBar>
+                                                                  <ListView fx:id="listaEmpleados" prefHeight="200.0" prefWidth="200.0" />
+                                                               </items>
+                                                            </SplitPane>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                             </tabs>
+                                          </TabPane>
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Proveedor">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TabPane prefHeight="419.0" prefWidth="598.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <tabs>
+                            <Tab text="Administracion">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.5" prefHeight="389.3333333333333" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <items>
+                                                <ToolBar orientation="VERTICAL">
+                                                   <items>
+                                                      <SplitMenuButton fx:id="seleccionClientesAdmin1" mnemonicParsing="false" text="Seleccionar">
+                                                         <items>
+                                                            <MenuItem fx:id="itemCrearCliente1" mnemonicParsing="false" text="Crear" />
+                                                            <MenuItem fx:id="itemEliminarCliente1" mnemonicParsing="false" text="Eliminar" />
+                                                            <MenuItem fx:id="itemActualizarCliente1" mnemonicParsing="false" text="Actualizar" />
+                                                         </items>
+                                                      </SplitMenuButton>
+                                                   </items>
+                                                </ToolBar>
+                                                <VBox>
+                                                   <children>
+                                                      <TextField fx:id="textProveedorNombre" promptText="Nombre" />
+                                                      <TextField fx:id="textProveedorCertificacion" promptText="Certificacion" />
+                                                      <TextField fx:id="textProveedorEvaluacion" promptText="Evaluacion" />
+                                                      <TextField fx:id="textProveedorPolitica" promptText="Politica Entrega" />
+                                                      <Button fx:id="botonOkProveedor" mnemonicParsing="false" onAction="#accionCompletarProveedor" prefHeight="25.0" prefWidth="72.0" text="Ok" />
+                                                   </children>
+                                                </VBox>
+                                             </items>
+                                          </SplitPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                            <Tab text="Consulta">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.5" prefHeight="389.3333333333333" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <items>
+                                                <ToolBar orientation="VERTICAL" prefHeight="392.0" prefWidth="101.0">
+                                                   <items>
+                                                      <SplitMenuButton fx:id="seleccionClientesConsulta1" mnemonicParsing="false" text="Seleccionar">
+                                                         <items>
+                                                            <MenuItem fx:id="itemConsultarCliente1" mnemonicParsing="false" onAction="#accionConsultaCliente" text="Consultar por ID" />
+                                                            <MenuItem fx:id="itemVerClientes1" mnemonicParsing="false" onAction="#accionVerClientes" text="Ver todos" />
+                                                         </items>
+                                                      </SplitMenuButton>
+                                                      <TextField fx:id="textClienteConsulta1" prefHeight="25.0" prefWidth="83.0" promptText="ID" visible="false" />
+                                                      <Button fx:id="botonClienteConsulta1" mnemonicParsing="false" text="Ok" visible="false" />
+                                                   </items>
+                                                </ToolBar>
+                                                <TableView fx:id="tablaClientes1" prefHeight="359.0" prefWidth="450.0">
+                                                   <columns>
+                                                      <TableColumn fx:id="colID1" prefWidth="75.0" text="ID" />
+                                                      <TableColumn fx:id="colNombre1" prefWidth="402.6666488647461" text="Nombre" />
+                                                   </columns>
+                                                </TableView>
+                                             </items>
+                                          </SplitPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Pagos">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
         </tabs>

@@ -20,13 +20,12 @@ public class Departamento implements UnidadOrganizacional {
         elementos.remove(elemento);
     }
 
-    public List<UnidadOrganizacional> verElementos() {
-        return new ArrayList<>(elementos);
+    public String getNombre() {
+        return nombre;
     }
 
-    @Override
-    public String toString() {
-        return "Departamento [nombre=" + nombre + ", elementos=" + elementos.size() + "]";
+    public List<UnidadOrganizacional> getElementos() {
+        return elementos;
     }
 
     @Override

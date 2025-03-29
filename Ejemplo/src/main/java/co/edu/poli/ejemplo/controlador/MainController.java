@@ -1,19 +1,24 @@
 package co.edu.poli.ejemplo.controlador;
 
+
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import co.edu.poli.ejemplo.modelo.Cliente;
+import co.edu.poli.ejemplo.modelo.Departamento;
+import co.edu.poli.ejemplo.modelo.Empleado;
 import co.edu.poli.ejemplo.modelo.FactoryAlimento;
 import co.edu.poli.ejemplo.modelo.FactoryElectronico;
 import co.edu.poli.ejemplo.modelo.Producto;
 import co.edu.poli.ejemplo.modelo.ProductoAlimentos;
 import co.edu.poli.ejemplo.modelo.ProductoElectronico;
 import co.edu.poli.ejemplo.modelo.ProductoFactory;
+import co.edu.poli.ejemplo.modelo.Proveedor;
+import co.edu.poli.ejemplo.modelo.UnidadOrganizacional;
 import co.edu.poli.ejemplo.servicios.DAOCliente;
 import co.edu.poli.ejemplo.servicios.DAOProducto;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.util.Callback;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,11 +26,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MainController {
@@ -33,37 +41,49 @@ public class MainController {
     private final Alert alerta;
     DAOProducto daoProducto;
     private DAOCliente daoCliente;
+    private static List<Departamento> listaDepartamentos = new ArrayList<>();
 
     @FXML
-    private Button botonConsultarPedido, botonConsultaClientes, botonProductoConsulta,
-            botonOkClientes, botonOkPedidos, botonOkProductos, botonClienteConsulta,
-            botonVerClientes, botonVerPedidos;
+    private TreeView<String> arbolDepartamentos;
 
     @FXML
-    private MenuItem itemActualizarCliente, itemActualizarPedido, itemActualizarProducto,
-            itemClonarProducto, itemCrearCliente, itemCrearPedido, itemCrearProducto,
-            itemConsultarCliente, itemConsultarProducto,
-            itemVerProductos, itemVerClientes,
-            itemEliminarCliente, itemEliminarPedido, itemEliminarProducto;
+    private Button botonClienteConsulta, botonClienteConsulta2, botonConsultaClientes,
+            botonConsultarPedido, botonEmpleadoConsulta, botonOkClientes, botonOkPedidos,
+            botonOkProductos, botonProductoConsulta, botonVerPedidos, botonDepartamentoConsulta;
 
-    @FXML
-    private SplitMenuButton seleccionClientesAdmin, seleccionClientesConsulta,
-            seleccionProductosConsulta, seleccionProductosAdmin, seleccionTipoProducto;
-    @FXML
-    private TextField textClienteID, textClienteNombre, textClientePedido,
-            textClienteConsulta, textFechaPedido, textNumeroPedido, textProductoConsulta,
-            textProductoDescripcion, textProductoPrecio, textProductoID, textProductoExtra;
-
-    @FXML
-    private TableView<Cliente> tablaClientes;
-    @FXML
-    private TableView<Producto> tablaProductos;
     @FXML
     private TableColumn<Cliente, String> colID, colNombre;
     @FXML
     private TableColumn<Producto, String> colIDP, colDes, colTipo, colExtra;
     @FXML
     private TableColumn<Producto, Float> colPrecio;
+
+    @FXML
+    private MenuItem itemActualizarCliente, itemActualizarEmpleado, itemActualizarPedido, itemActualizarProducto,
+            itemClonarProducto, itemConsultarCliente, itemConsultarCliente2, itemConsultarEmpleado, itemConsultarProducto,
+            itemCrearCliente, itemCrearEmpleado, itemCrearPedido, itemCrearProducto, itemEliminarCliente,
+            itemEliminarCliente2, itemEliminarEmpleado, itemEliminarPedido, itemEliminarProducto, itemTipoAlimento,
+            itemTipoElectronico, itemVerClientes, itemVerEmpleado, itemVerProductos;
+
+    @FXML
+    private ListView<?> listaEmpleados;
+
+    @FXML
+    private SplitMenuButton seleccionClientesAdmin, seleccionClientesConsulta, seleccionDepartamentoAdmin, seleccionDepartamentoConsulta,
+            seleccionEmpleadoAdmin, seleccionEmpleadoConsulta, seleccionProductosAdmin, seleccionProductosConsulta,
+            seleccionTipoProducto, seleccionDepartamentoCrearEmpleado;
+
+    @FXML
+    private TableView<Cliente> tablaClientes;
+    @FXML
+    private TableView<Producto> tablaProductos;
+
+    @FXML
+    private TextField textClienteConsulta, textClienteID, textClienteNombre, textClientePedido,
+            textDepartamentoNombre, textEmpleadoCargo, textEmpleadoConsulta, textEmpleadoID, textEmpleadoNombre,
+            textFechaPedido, textNumeroPedido, textProductoConsulta, textProductoDescripcion, textProductoExtra,
+            textProductoID, textProductoPrecio, textDepartamentoConsulta,
+            textProveedorNombre, textProveedorCertificacion, textProveedorEvaluacion, textProveedorPolitica;
 
     public MainController() {
         this.alerta = new Alert(AlertType.NONE);
@@ -514,25 +534,17 @@ public class MainController {
             }
 
             // Solución usando Callback para garantizar el tipo correcto
-            colTipo.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Producto, String>, ObservableValue<String>>() {
-                @Override
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<Producto, String> cellData) {
-                    return new SimpleStringProperty(cellData.getValue() instanceof ProductoAlimentos ? "Alimento" : "Electrónico");
-                }
-            });
+            colTipo.setCellValueFactory((TableColumn.CellDataFeatures<Producto, String> cellData) -> new SimpleStringProperty(cellData.getValue() instanceof ProductoAlimentos ? "Alimento" : "Electrónico"));
 
-            colExtra.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Producto, String>, ObservableValue<String>>() {
-                @Override
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<Producto, String> cellData) {
-                    Producto producto = cellData.getValue();
-                    String extraInfo = "";
-                    if (producto instanceof ProductoAlimentos) {
-                        extraInfo = ((ProductoAlimentos) producto).getAporteCalorico() + " kcal";
-                    } else if (producto instanceof ProductoElectronico) {
-                        extraInfo = ((ProductoElectronico) producto).getVoltajeEntrada() + "V";
-                    }
-                    return new SimpleStringProperty(extraInfo);
+            colExtra.setCellValueFactory((TableColumn.CellDataFeatures<Producto, String> cellData) -> {
+                Producto producto = cellData.getValue();
+                String extraInfo = "";
+                if (producto instanceof ProductoAlimentos) {
+                    extraInfo = ((ProductoAlimentos) producto).getAporteCalorico() + " kcal";
+                } else if (producto instanceof ProductoElectronico) {
+                    extraInfo = ((ProductoElectronico) producto).getVoltajeEntrada() + "V";
                 }
+                return new SimpleStringProperty(extraInfo);
             });
 
             // Crear la lista con el producto encontrado
@@ -543,8 +555,284 @@ public class MainController {
 
         } catch (Exception e) {
             mostrarError("Error al consultar producto: " + e.getMessage());
-            e.printStackTrace();
+
         }
     }
 
+    @FXML
+    void accionCrearDepartamento(ActionEvent event) {
+        textDepartamentoNombre.clear();
+        textDepartamentoNombre.setPromptText("Ingrese el Nombre del departamento a crear");
+        textDepartamentoNombre.setEditable(true);
+        seleccionDepartamentoAdmin.setText("Crear");
+    }
+
+    @FXML
+    void accionEliminarDepartamento(ActionEvent event) {
+        textDepartamentoNombre.clear();
+        textDepartamentoNombre.setPromptText("Ingrese el Nombre del departamento a eliminar");
+        textDepartamentoNombre.setEditable(true);
+        seleccionDepartamentoAdmin.setText("Eliminar");
+    }
+
+    @FXML
+    void accionCompletarDepartamento(ActionEvent event) {
+        // Obtener la opción seleccionada en el SplitMenuButton
+        String opcionSeleccionada = seleccionDepartamentoAdmin.getText();
+        String mensaje;
+        Departamento nuevoDepartamento;
+
+        try {
+            switch (opcionSeleccionada) {
+                case "Crear":
+                    // Crear un nuevo Departamento
+                    nuevoDepartamento = new Departamento(textDepartamentoNombre.getText());
+
+                    // Validar que el nombre no esté vacío
+                    if (nuevoDepartamento.getNombre().isEmpty()) {
+                        mostrarAlerta("Por favor, complete todos los campos");
+                        return;
+                    }
+
+                    // Validar si el departamento ya existe en la lista (sin sobrescribir equals())
+                    boolean existe = false;
+                    for (Departamento depto : listaDepartamentos) {
+                        if (depto.getNombre().equals(nuevoDepartamento.getNombre())) {
+                            existe = true;
+                            break;
+                        }
+                    }
+
+                    if (existe) {
+                        mostrarAlerta("El departamento ya existe");
+                    } else {
+                        // Agregar el nuevo departamento a la lista
+                        listaDepartamentos.add(nuevoDepartamento);
+                        mensaje = "Departamento creado exitosamente: ";
+                        mostrarAlerta(mensaje + " " + nuevoDepartamento.getNombre());
+                        llenarMenuDepartamentos();
+                    }
+                    break;
+
+                case "Eliminar":
+                    // Eliminar un Departamento
+                    String departamentoNombreEliminar = textDepartamentoNombre.getText();
+                    if (departamentoNombreEliminar.isEmpty()) {
+                        mostrarAlerta("Por favor, ingrese el nombre del Departamento a eliminar");
+                        return;
+                    }
+
+                    // Buscar el departamento por nombre y eliminarlo
+                    Departamento departamentoEliminar = buscarDepartamentoPorNombre(departamentoNombreEliminar);
+                    if (departamentoEliminar != null) {
+                        listaDepartamentos.remove(departamentoEliminar);
+                        mensaje = "Departamento eliminado exitosamente";
+                        llenarMenuDepartamentos();
+                    } else {
+                        mensaje = "Departamento no encontrado";
+                    }
+                    mostrarAlerta(mensaje);
+                    break;
+                default:
+                    // Si no se seleccionó ninguna opción
+                    mostrarAlerta("No has seleccionado ninguna opción");
+                    break;
+            }
+        } catch (Exception e) {
+            // Capturar cualquier error inesperado
+            mostrarError(e.getMessage());
+        }
+    }
+
+    private Departamento buscarDepartamentoPorNombre(String nombre) {
+        for (Departamento depto : listaDepartamentos) {
+            if (depto.getNombre().equalsIgnoreCase(nombre)) {
+                return depto;
+            }
+        }
+        return null;  // Si no se encuentra el departamento
+    }
+
+    @FXML
+    void accionConsultaDepartamento(ActionEvent event) {
+        seleccionDepartamentoConsulta.setText("Consulta por Nombre");
+        textDepartamentoConsulta.clear();
+        arbolDepartamentos.setRoot(null);
+        textDepartamentoConsulta.setVisible(true);
+        botonDepartamentoConsulta.setVisible(true);
+    }
+
+    @FXML
+    void accionBotonConsultaDepartamento(ActionEvent event) {
+        // Obtener el nombre del departamento desde el TextField
+        String nombreDepartamento = textDepartamentoConsulta.getText().trim();
+
+        // Validar si el nombre del departamento no está vacío
+        if (nombreDepartamento.isEmpty()) {
+            mostrarAlerta("Por favor, ingrese un nombre de departamento");
+            return;
+        }
+
+        // Buscar el departamento por nombre en la lista
+        Departamento departamentoConsulta = buscarDepartamentoPorNombre(nombreDepartamento);
+
+        // Si no se encuentra el departamento
+        if (departamentoConsulta == null) {
+            mostrarAlerta("Departamento no encontrado");
+            return;
+        }
+
+        // Crear el árbol del departamento con sus empleados
+        TreeItem<String> rootItem = crearArbol(departamentoConsulta);
+
+        // Establecer el TreeItem raíz en el TreeView
+        arbolDepartamentos.setRoot(rootItem);
+    }
+
+    @FXML
+    void accionVerDepartamentos(ActionEvent event) {
+        seleccionDepartamentoConsulta.setText("Ver Todos");
+        arbolDepartamentos.setRoot(null);
+        textDepartamentoConsulta.setVisible(false);
+        botonDepartamentoConsulta.setVisible(false);
+
+        // Crear un nodo raíz llamado "Organización"
+        TreeItem<String> rootItem = new TreeItem<>("Organización");
+
+        // Iterar sobre la lista de departamentos
+        for (Departamento departamento : listaDepartamentos) {
+            // Crear un nodo para cada departamento
+            TreeItem<String> departamentoItem = new TreeItem<>(departamento.getNombre());
+
+            // Iterar sobre los empleados del departamento
+            for (UnidadOrganizacional elemento : departamento.getElementos()) {
+                if (elemento instanceof Empleado) {
+                    // Crear un nodo para cada empleado y agregarlo como hijo del departamento
+                    Empleado empleado = (Empleado) elemento;
+                    TreeItem<String> empleadoItem = new TreeItem<>(empleado.toString());
+                    departamentoItem.getChildren().add(empleadoItem);
+                }
+            }
+
+            // Agregar el nodo del departamento a la raíz
+            rootItem.getChildren().add(departamentoItem);
+        }
+
+        // Establecer la raíz del TreeView
+        arbolDepartamentos.setRoot(rootItem);
+    }
+
+    private TreeItem<String> crearArbol(Departamento departamento) {
+        // Crear un TreeItem raíz con el nombre del departamento
+        TreeItem<String> rootItem = new TreeItem<>(departamento.getNombre());
+
+        // Iterar sobre los elementos (empleados y sub-departamentos)
+        for (UnidadOrganizacional elemento : departamento.getElementos()) {
+            if (elemento instanceof Departamento) {
+                // Si es un sub-departamento, creamos el árbol recursivamente
+                rootItem.getChildren().add(crearArbol((Departamento) elemento));
+            } else if (elemento instanceof Empleado) {
+                // Si es un empleado, agregamos un nodo con la información del empleado
+                rootItem.getChildren().add(new TreeItem<>(elemento.toString()));
+            }
+        }
+
+        return rootItem;
+    }
+
+    @FXML
+    private void llenarMenuDepartamentos() {
+
+        // Limpiar el menú antes de llenarlo
+        seleccionDepartamentoCrearEmpleado.getItems().clear();
+
+        // Crear un menuItem para cada departamento y agregarlo al SplitMenuButton
+        for (Departamento departamento : listaDepartamentos) {
+            MenuItem menuItem = new MenuItem(departamento.getNombre());
+
+            // Agregar un evento para actualizar el texto del SplitMenuButton cuando se seleccione un departamento
+            menuItem.setOnAction(event -> {
+                seleccionDepartamentoCrearEmpleado.setText(departamento.getNombre());
+            });
+
+            // Agregar el MenuItem al SplitMenuButton
+            seleccionDepartamentoCrearEmpleado.getItems().add(menuItem);
+        }
+    }
+
+    @FXML
+    void accionCompletarEmpleados(ActionEvent event) {
+        // Obtener la opción seleccionada en el SplitMenuButton (el departamento)
+        //String opcionSeleccionada = seleccionEmpleadoAdmin.getText();  // Usamos el SplitMenuButton para obtener la opción seleccionada
+        String opcionSeleccionada = "Crear";
+        String mensaje;
+        Departamento departamentoSeleccionado;
+
+        try {
+            switch (opcionSeleccionada) {
+                case "Crear":
+                    // Obtener los datos del empleado de los TextField
+                    String empleadoID = textEmpleadoID.getText();
+                    String empleadoNombre = textEmpleadoNombre.getText();
+                    String empleadoCargo = textEmpleadoCargo.getText();
+
+                    // Validar que los campos no estén vacíos
+                    if (empleadoID.isEmpty() || empleadoNombre.isEmpty() || empleadoCargo.isEmpty()) {
+                        mostrarAlerta("Por favor, complete todos los campos del empleado");
+                        return;
+                    }
+
+                    // Crear un nuevo empleado
+                    Empleado nuevoEmpleado = new Empleado(empleadoID, empleadoNombre, empleadoCargo);
+
+                    // Buscar el departamento seleccionado
+                    departamentoSeleccionado = buscarDepartamentoPorNombre(seleccionDepartamentoCrearEmpleado.getText());
+
+                    // Verificar si el departamento existe
+                    if (departamentoSeleccionado != null) {
+                        // Agregar el nuevo empleado al departamento (usando el patrón Composite)
+                        departamentoSeleccionado.agregarElemento(nuevoEmpleado);
+                        mensaje = "Empleado creado exitosamente en el departamento " + departamentoSeleccionado.getNombre();
+                        mostrarAlerta(mensaje);
+                    } else {
+                        mensaje = "Departamento no encontrado";
+                        mostrarAlerta(mensaje);
+                    }
+                    break;
+
+                default:
+                    // Si no se seleccionó ninguna opción
+                    mensaje = "No has seleccionado ninguna opción válida para crear un empleado";
+                    mostrarAlerta(mensaje);
+                    break;
+            }
+        } catch (Exception e) {
+            // Capturar cualquier error inesperado
+            mostrarError(e.getMessage());
+        }
+    }
+
+    @FXML
+    private void accionCompletarProveedor() {
+
+        String nombre = textProveedorNombre.getText();
+
+        if (nombre.isEmpty()) {
+            mostrarAlerta("Por favor, ingrese el nombre del proveedor.");
+            return;
+        }
+
+        // Crear el proveedor usando el patrón Builder
+        Proveedor proveedor = new Proveedor.Builder()
+                .setNombre(nombre)
+                .setCertificacion(new Proveedor.Certificacion(textProveedorCertificacion.getText()))
+                .setEvaluacion(new Proveedor.Evaluacion(textProveedorEvaluacion.getText()))
+                .setPoliticaEntrega(new Proveedor.PoliticaEntrega(textProveedorPolitica.getText()))
+                .build();
+
+        // Mostrar una alerta con el toString del proveedor
+        mostrarAlerta(proveedor.toString());
+    }
 }
+
+

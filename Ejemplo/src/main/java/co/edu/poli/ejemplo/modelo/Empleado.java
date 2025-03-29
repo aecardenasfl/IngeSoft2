@@ -1,6 +1,5 @@
 package co.edu.poli.ejemplo.modelo;
 
-
 public class Empleado implements UnidadOrganizacional {
 
     private String id;
@@ -14,11 +13,6 @@ public class Empleado implements UnidadOrganizacional {
     }
 
     @Override
-    public void mostrarDetalles() {
-        System.out.println("ID" + id +" - Empleado: " + nombre + " - Cargo: " + cargo);
-    }
-
-    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Empleado{");
@@ -29,4 +23,32 @@ public class Empleado implements UnidadOrganizacional {
         return sb.toString();
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    @Override
+    public void mostrarDetalles() {
+        System.out.println("ID" + id + " - Empleado: " + nombre + " - Cargo: " + cargo);
+    }
 }
