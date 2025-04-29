@@ -1,39 +1,36 @@
 package co.edu.poli.modelo;
 
 public class ClienteFachada {
-private GestorInformacionCliente gestorInformacion;
-    private GestorPedidos gestorPedidos;
+
+    private GestorInformacionCliente gestorInformacion;
     private GestorPagos gestorPagos;
+    private GestorPedidos gestorPedidos;
 
     public ClienteFachada() {
         this.gestorInformacion = new GestorInformacionCliente();
-        this.gestorPedidos = new GestorPedidos();
         this.gestorPagos = new GestorPagos();
+        this.gestorPedidos = new GestorPedidos();
     }
 
-    // Métodos de la fachada
-
-    public String actualizarInformacionCliente(String nombre, String correo) {
-       return gestorInformacion.actualizarInformacion(nombre, correo);
+    // Gestión completa de información personal
+    public String gestionarInformacionCliente(String nombre, String correo) {
+        String actualizacion = gestorInformacion.actualizarInformacion(nombre, correo);
+        String informacion = gestorInformacion.mostrarInformacion();
+        return actualizacion + "\n" + informacion;
     }
 
-    public String mostrarInformacionCliente() {
-        return gestorInformacion.mostrarInformacion();
+    // Gestión completa del historial de pedidos
+    public String gestionarHistorialPedidos(String nuevoPedido) {
+        String resultadoPedido = gestorPedidos.realizarPedido(nuevoPedido);
+        String historial = gestorPedidos.mostrarHistorialPedidos();
+        return resultadoPedido + "\n" + historial;
     }
 
-    public String realizarPedidoCliente(String pedido) {
-        return gestorPedidos.realizarPedido(pedido);
-    }
-
-    public String mostrarHistorialPedidosCliente() {
-       return gestorPedidos.mostrarHistorialPedidos();
-    }
-
-    public String bloquearMetodoPagoCliente(String metodo, boolean activo) {
-        return gestorPagos.bloquearMetodoPago(metodo, activo);
-    }
-
-    public String mostrarMetodosPagoActivosCliente() {
-       return gestorPagos.mostrarMetodosPagoActivos();
+    // Gestión completa de métodos de pago
+    public String gestionarMetodosPago(String metodo, boolean activo) {
+        
+        String metodosActivos = gestorPagos.mostrarMetodosPagoActivos();
+        String cambioEstado = gestorPagos.bloquearMetodoPago(metodo, activo);
+        return metodosActivos + "\n" +cambioEstado;
     }
 }

@@ -3,7 +3,7 @@ package co.edu.poli.modelo;
 public class GestorPagos {
 
     public String bloquearMetodoPago(String metodo, boolean activo) {
-        return (activo ? "Activado" : "Bloqueado") + " método: " + metodo;
+        return "Método: " + metodo+" estado:"+(activo ? " Activado" : " Bloqueado");
     }
 
     public String mostrarMetodosPagoActivos() {
